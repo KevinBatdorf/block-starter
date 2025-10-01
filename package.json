@@ -1,0 +1,39 @@
+{
+	"name": "block-starter",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "A text block where each line is full width.",
+	"author": "Kevin Batdorf",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "tsc && biome check && wp-scripts build",
+		"check": "biome check --write",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"test:e2e": "npx playwright test",
+		"test:e2e:ui": "npx playwright test --ui",
+		"start": "wp-scripts start"
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.55.1",
+		"@types/node": "^24.6.0",
+		"@types/wordpress__block-editor": "^11.5.17",
+		"@types/wordpress__blocks": "^12.5.18",
+		"@wordpress/e2e-test-utils-playwright": "^1.31.0",
+		"@wordpress/scripts": "^30.24.0",
+		"typescript": "^5.9.2"
+	},
+	"dependencies": {
+		"@biomejs/biome": "^2.2.4",
+		"@tailwindcss/postcss": "^4.1.13",
+		"@wordpress/block-editor": "^15.4.0",
+		"@wordpress/blocks": "^15.4.0",
+		"@wordpress/components": "^30.4.0",
+		"@wordpress/data": "^10.31.0",
+		"@wordpress/element": "^6.31.0",
+		"@wordpress/i18n": "^6.4.0",
+		"postcss": "^8.5.6",
+		"tailwindcss": "^4.1.13"
+	}
+}

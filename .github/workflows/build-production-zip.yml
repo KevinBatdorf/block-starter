@@ -1,0 +1,36 @@
+name: Build production zip file
+on:
+    push:
+    workflow_dispatch:
+jobs:
+    build:
+        name: Build zip file
+        concurrency:
+            group: production - ${{ github.event.pull_request.number || github.ref }}
+            cancel-in-progress: true
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v4
+
+            - name: npm install and build
+              run: |
+                  npm ci
+                  npm run build
+              env:
+                  CI: true
+
+            - name: Copy project to dist
+              run: rsync -a ./ dist/
+
+            - name: Remove distignore files
+              run: |
+                  cd dist
+                  grep -vE '^\s*#|^\s*$' ../.distignore | xargs rm -rf
+
+            - name: Package
+              uses: actions/upload-artifact@v4
+              with:
+                  name: block-starter
+                  retention-days: 5
+                  path: dist/

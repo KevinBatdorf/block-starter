@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kevinbatdorf/block-starter",
+	"version": "0.1.0",
+	"title": "block-starter",
+	"category": "widgets",
+	"icon": "menu",
+	"description": "A pixel editor beautifully designed for WordPress.",
+	"example": {},
+	"attributes": {
+		"content": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "block-starter",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./front/front.js"
+}
