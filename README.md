@@ -11,6 +11,8 @@ My starter template for WordPress block plugins.
 - Search replace `kevinbatdorf` with your namespace/username
 - Search replace `block-starter` with your plugin slug
 - Search replace `Block Starter` with your plugin name
+- Run `npm install && composer install`
+- Run `npm run start` to start the dev server
 
 ### Features
 

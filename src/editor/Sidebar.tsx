@@ -1,5 +1,5 @@
 import { InspectorControls } from "@wordpress/block-editor";
-import { BaseControl, PanelBody } from "@wordpress/components";
+import { BaseControl, Button, PanelBody } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import type { Attributes } from "../index.tsx";
 
@@ -14,7 +14,16 @@ export const Sidebar = ({ attributes, setAttributes }: Props) => {
 			<div className="block-starter-editor">
 				<PanelBody title={__("Settings", "block-starter")}>
 					<BaseControl>
-						<div className="mt-5">Coming soon</div>
+						<div>Coming soon</div>
+						<p className="my-5">{attributes.content}</p>
+						<Button
+							variant="primary"
+							onClick={() => {
+								setAttributes({ content: `Updated: ${Math.random()}` });
+							}}
+						>
+							{__("Click me", "block-starter")}
+						</Button>
 					</BaseControl>
 				</PanelBody>
 			</div>

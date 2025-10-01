@@ -8,7 +8,8 @@
 	"main": "build/index.js",
 	"scripts": {
 		"build": "tsc && biome check && wp-scripts build",
-		"check": "biome check --write",
+		"lint": "biome check",
+		"lint:fix": "biome check --write",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"test:e2e": "npx playwright test",

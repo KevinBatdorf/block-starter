@@ -14,11 +14,13 @@ export const Editor = ({ attributes, setAttributes }: Props) => {
 		<>
 			<Sidebar attributes={attributes} setAttributes={setAttributes} />
 			<div {...blockProps()}>
-				<RichText
-					value={attributes.content}
-					placeholder={__("Enter some text...", "block-starter")}
-					onChange={(content) => setAttributes({ content })}
-				/>
+				<div className="font-bold text-3xl mb-4">
+					<RichText
+						value={attributes.content}
+						placeholder={__("Enter some text...", "block-starter")}
+						onChange={(content) => setAttributes({ content })}
+					/>
+				</div>
 			</div>
 		</>
 	);
