@@ -68,8 +68,8 @@ jobs:
     - name: Update README last passed
       if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'schedule' && success() }}
       run: |
-        git config user.name "extendify-ci"
-        git config user.email "dev@extendify.com"
+        git config user.name "github-ci"
+        git config user.email "dev@example.com"
         ts="$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
 
         # Remove any existing timestamp comments and add a new one
