@@ -7,8 +7,8 @@ test.beforeEach(async ({ requestUtils }) => {
 
 test("Block is added", async ({ admin, page, editor }) => {
 	await admin.createNewPost({ title: "My first post" });
-	// Flaky otherwise
 	await editor.switchToLegacyCanvas();
+	await page.waitForSelector('[aria-label="Add block"]');
 	// Just a dummy test to verify things are working
 	await editor.insertBlock({ name: "kevinbatdorf/block-starter" });
 	// This text would be in the sidebar
