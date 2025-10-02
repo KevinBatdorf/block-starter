@@ -57,16 +57,16 @@ jobs:
       run: npx playwright test
 
     - name: Update README last passed
-      if: ${{ github.ref == 'refs/heads/main' && success() }}
+      if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'schedule' && success() }}
       run: |
         git config user.name "extendify-ci"
         git config user.email "dev@extendify.com"
         ts="$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-        sed -i.bak -E 's|(<!-- last-pass:start -->).*(<!-- last-pass:end -->)|\1 Last passed: '"$ts"' \2|' README.md || true
-        if ! grep -q '<!-- last-pass:start -->' README.md; then
-          printf "\n\n<!-- last-pass:start -->Last passed: %s <!-- last-pass:end -->\n" "$ts" >> README.md
-        fi
-        rm -f README.md.bak
+
+        # Remove any existing timestamp comments and add a new one
+        sed -i -E '/Playwright last run/d' README.md || true
+        printf "\n<!-- Playwright last run: %s -->\n" "$ts" >> README.md
+
         git add README.md
         git diff --cached --quiet && exit 0
         git commit -m "chore(ci): update last passed at $ts"
