@@ -7,6 +7,10 @@ on:
   workflow_call: # Triggered by other workflows
 jobs:
   test:
+    name: Run plugin check
+    concurrency:
+      group: production - ${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
