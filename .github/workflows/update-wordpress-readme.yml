@@ -6,6 +6,9 @@ on:
 jobs:
   trunk:
     name: Push to WordPress.org
+    concurrency:
+      group: ${{ github.workflow }} - ${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
