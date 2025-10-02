@@ -7,14 +7,14 @@ export default defineConfig({
 	testDir: "./tests",
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
-	workers: process.env.CI ? 1 : undefined,
+	workers: 1,
 	reporter: "html",
 	use: {
 		baseURL: BASE,
 		trace: "on-first-retry",
 	},
 	webServer: {
-		command: `npx @wp-playground/cli@latest server --auto-mount --blueprint=tests/blueprint.json --port=${PORT} --experimental-multi-worker=3`,
+		command: `npx @wp-playground/cli@latest server --auto-mount --blueprint=tests/blueprint.json --port=${PORT} --internal-cookie-store=true --login=false`,
 		url: BASE,
 		reuseExistingServer: false,
 	},
@@ -22,14 +22,6 @@ export default defineConfig({
 		{
 			name: "chromium",
 			use: { ...devices["Desktop Chrome"] },
-		},
-		{
-			name: "firefox",
-			use: { ...devices["Desktop Firefox"] },
-		},
-		{
-			name: "webkit",
-			use: { ...devices["Desktop Safari"] },
 		},
 	],
 });

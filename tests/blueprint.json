@@ -1,6 +1,6 @@
 {
 	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
-	"login": true,
+	"login": false,
 	"steps": [
 		{
 			"step": "defineWpConfigConsts",

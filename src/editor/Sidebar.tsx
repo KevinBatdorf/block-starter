@@ -14,7 +14,7 @@ export const Sidebar = ({ attributes, setAttributes }: Props) => {
 			<div className="block-starter-editor">
 				<PanelBody title={__("Settings", "block-starter")}>
 					<BaseControl>
-						<div>Coming soon</div>
+						<div data-testid="coming-soon">Coming soon</div>
 						<p className="my-5">{attributes.content}</p>
 						<Button
 							variant="primary"
