@@ -1,36 +1,65 @@
 name: Build production zip file
 on:
-    push:
-    workflow_dispatch:
+  push:
+  workflow_dispatch:
+
 jobs:
-    build:
-        name: Build zip file
-        concurrency:
-            group: production - ${{ github.event.pull_request.number || github.ref }}
-            cancel-in-progress: true
-        runs-on: ubuntu-latest
-        steps:
-            - name: Check out code
-              uses: actions/checkout@v4
+  build:
+    name: Build zip file
+    concurrency:
+      group: production - ${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
 
-            - name: npm install and build
-              run: |
-                  npm ci
-                  npm run build
-              env:
-                  CI: true
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
 
-            - name: Copy project to dist
-              run: rsync -a ./ dist/
+      - uses: actions/setup-node@v4
+        id: setup-node
+        with:
+          node-version: lts/*
+          cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            package.json
 
-            - name: Remove distignore files
-              run: |
-                  cd dist
-                  grep -vE '^\s*#|^\s*$' ../.distignore | xargs rm -rf
+      - name: Cache node_modules and npm cache
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-npm-
 
-            - name: Package
-              uses: actions/upload-artifact@v4
-              with:
-                  name: block-starter
-                  retention-days: 5
-                  path: dist/
+      - name: npm install and build
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: |
+          npm ci --prefer-offline --no-audit --no-fund
+          npm run build
+        env:
+          CI: true
+
+      - name: Build when cache hit
+        if: steps.cache-node-modules.outputs.cache-hit == 'true'
+        run: npm run build
+        env:
+          CI: true
+
+      - name: Copy project to dist
+        run: rsync -a ./ dist/
+
+      - name: Remove distignore files
+        run: |
+          cd dist
+          grep -vE '^\s*#|^\s*$' ../.distignore | xargs rm -rf
+
+      - name: Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: block-starter
+          retention-days: 5
+          path: dist/
