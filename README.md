@@ -11,7 +11,8 @@ An opinionated starter template for crafting WordPress block plugins.
 
 - Click "Use this template" at the top+right of the repo
 - Search/replace `kevinbatdorf` with your namespace/username
-- Search/replace `block-starter` with your plugin slug (and update main filename too)
+- Search/replace `block-starter` with your plugin slug
+- Update `block-starter.php` to match your new plugin slug
 - Run `composer install` to install PHP dev dependencies (sometimes needed for autocomplete in IDEs)
 - Run `npm install` to install dependencies
 - Run `npm run start` to start the dev server
