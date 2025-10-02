@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Block Starter
+ * Plugin Name:       block-starter
  * Description:       Starter project for building WordPress blocks.
  * Version:           0.1.0
  * Requires at least: 6.8

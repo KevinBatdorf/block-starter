@@ -53,9 +53,7 @@ jobs:
         run: rsync -a ./ dist/
 
       - name: Remove distignore files
-        run: |
-          cd dist
-          grep -vE '^\s*#|^\s*$' ../.distignore | xargs rm -rf
+        run: rsync -a --delete --exclude-from='.distignore' ./ dist/
 
       - name: Package
         uses: actions/upload-artifact@v4
