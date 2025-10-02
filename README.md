@@ -24,7 +24,10 @@ An opinionated starter template for crafting WordPress block plugins.
 
 
 
-![block-starter](https://raw.githubusercontent.com/kevinbatdorf/block-starter/main/.wordpress-org/screenshot-1.jpg)
+<div align="center">
+    <img src="https://raw.githubusercontent.com/kevinbatdorf/block-starter/main/.wordpress-org/screenshot-1.jpg" alt="block-starter" />
+</div>
+
 
 <!-- This is to prevent the GH Actions scheduler from pausing -->
 <!-- Playwright last run: not yet -->
