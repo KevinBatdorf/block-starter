@@ -53,6 +53,11 @@ jobs:
       if: steps.cache-browsers.outputs.cache-hit != 'true'
       run: npx playwright install --with-deps
 
+    - name: Build project
+      run: npm run build
+      env:
+        CI: true
+
     - name: Run Playwright tests
       run: npx playwright test
 
