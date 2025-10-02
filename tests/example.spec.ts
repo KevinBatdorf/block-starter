@@ -7,12 +7,8 @@ test.beforeEach(async ({ requestUtils }) => {
 
 test("Block is added", async ({ admin, page, editor }) => {
 	await admin.createNewPost({ title: "My first post" });
-	// Flaky otherwise
-	await editor.switchToLegacyCanvas();
 	// Just a dummy test to verify things are working
 	await editor.insertBlock({ name: "kevinbatdorf/block-starter" });
 	// This text would be in the sidebar
-	expect(page.getByTestId("coming-soon")).toContainText("Coming soon", {
-		timeout: 15_000,
-	});
+	expect(page.getByTestId("coming-soon")).toContainText("Coming soon");
 });

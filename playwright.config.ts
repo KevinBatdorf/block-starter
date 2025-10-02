@@ -12,6 +12,8 @@ export default defineConfig({
 	use: {
 		baseURL: BASE,
 		trace: "on-first-retry",
+		video: "retain-on-failure",
+		screenshot: "only-on-failure",
 	},
 	webServer: {
 		command: `npx @wp-playground/cli@latest server --auto-mount --blueprint=tests/blueprint.json --port=${PORT} --internal-cookie-store=true --login=false`,

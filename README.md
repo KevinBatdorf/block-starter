@@ -3,7 +3,9 @@
 
 ## block-starter
 
-My starter template for WordPress block plugins.
+An opinionated starter template for crafting WordPress block plugins.
+
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/kevinbatdorf.svg?style=social&label=Follow%20%40kevinbatdorf)](https://twitter.com/kevinbatdorf)
 
 ### Usage
 
@@ -22,9 +24,8 @@ My starter template for WordPress block plugins.
 - Playwright for end-to-end testing using WP Playground
 
 
-[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/kevinbatdorf.svg?style=social&label=Follow%20%40kevinbatdorf)](https://twitter.com/kevinbatdorf)
 
-![block-starter](https://raw.githubusercontent.com/kevinbatdorf/block-starter/main/.wordpress-org/screenshot-1.jpg)
+![block-starter](https://raw.githubusercontent.com/kevinbatdorf/block-starter/main/.wordpress-org/screenshot-1.png)
 
 <!-- This is to prevent the GH Actions scheduler from pausing -->
-<!-- last-pass:start -->Last passed: not yet <!-- last-pass:end -->
+<!-- Playwright last run: not yet -->
