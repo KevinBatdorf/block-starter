@@ -1,4 +1,4 @@
-name: Plugin Check and Test
+name: Playwright
 on:
   pull_request:
   push:
@@ -8,8 +8,6 @@ on:
     - cron: '0 8 * * *'
 
 jobs:
-  plugin-check:
-    uses: ./.github/workflows/plugin-check.yml
   playwright:
     timeout-minutes: 60
     runs-on: ubuntu-latest
