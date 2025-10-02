@@ -24,7 +24,7 @@ An opinionated starter template for crafting WordPress block plugins.
 - Biomejs for linting and formatting
 - Playwright for end-to-end testing using WP Playground
 - Runs the Plugin Check from WordPress on main and release
-
+- Auto deployment to WordPress.org SVN on release (via 10up Action)
 
 
 <div align="center">
