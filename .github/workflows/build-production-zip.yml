@@ -49,15 +49,12 @@ jobs:
         env:
           CI: true
 
-      - name: Copy project to dist
-        run: rsync -a ./ dist/
-
-      - name: Remove distignore files
-        run: rsync -a --delete --exclude-from='.distignore' ./ dist/
+      - name: Copy project to block-starter without distignore files
+        run: rsync -a --delete --exclude-from='.distignore' ./ block-starter/
 
       - name: Package
         uses: actions/upload-artifact@v4
         with:
           name: block-starter
           retention-days: 5
-          path: dist/
+          path: block-starter/

@@ -42,13 +42,10 @@ jobs:
       env:
         CI: true
 
-    - name: Copy project to dist
-      run: rsync -a ./ dist/
-
-    - name: Remove distignore files
-      run: rsync -a --delete --exclude-from='.distignore' ./ dist/
+    - name: copy files except those in .distignore
+      run: rsync -a --delete --exclude-from='.distignore' ./ block-starter/
 
     - name: Run plugin check
       uses: wordpress/plugin-check-action@v1
       with:
-        build-dir: dist
+        build-dir: block-starter
