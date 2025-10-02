@@ -8,6 +8,7 @@ test.beforeEach(async ({ requestUtils }) => {
 test("Block is added", async ({ admin, page, editor }) => {
 	await admin.createNewPost({ title: "My first post" });
 	// Wait for editor iFrame to load
+	await admin.visitAdminPage("plugins.php");
 	await page.waitForSelector("iframe[name='editor-canvas']", {
 		timeout: 15_000,
 	});
