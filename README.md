@@ -23,6 +23,7 @@ An opinionated starter template for crafting WordPress block plugins.
 - TypeScript
 - Biomejs for linting and formatting
 - Playwright for end-to-end testing using WP Playground
+- Runs the Plugin Check from WordPress on main and release
 
 
 
