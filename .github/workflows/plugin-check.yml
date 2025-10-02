@@ -1,0 +1,9 @@
+name: 'Plugin Check'
+on:
+  pull_request:
+  push:
+    branches: main
+
+jobs:
+  plugin-check:
+    uses: ./.github/workflows/reusable/plugin-check.yml
