@@ -4,8 +4,9 @@ on:
     types: published
 jobs:
     plugin-check:
-      uses: ./.github/reusable/plugin-check.yml
+      uses: ./.github/workflows/plugin-check.yml
     tag:
+      needs: plugin-check
       name: Make release
       runs-on: ubuntu-latest
       steps:

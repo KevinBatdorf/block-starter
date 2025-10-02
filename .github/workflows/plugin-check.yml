@@ -1,9 +1,56 @@
 name: 'Plugin Check'
 on:
-  pull_request:
-  push:
-    branches: main
-
+  workflow_call: # Triggered by other workflows
 jobs:
-  plugin-check:
-    uses: ./.github/reusable/plugin-check.yml
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v4
+      id: setup-node
+      with:
+        node-version: lts/*
+        cache: 'npm'
+        cache-dependency-path: |
+          package-lock.json
+          package.json
+
+    - name: Cache node_modules and npm cache
+      id: cache-node-modules
+      uses: actions/cache@v4
+      with:
+        path: |
+          node_modules
+          ~/.npm
+        key: ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-npm-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ steps.setup-node.outputs.node-version }}-npm-
+
+    - name: npm install and build
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: |
+        npm ci --prefer-offline --no-audit --no-fund
+        npm run build
+      env:
+        CI: true
+
+    - name: Build when cache hit
+      if: steps.cache-node-modules.outputs.cache-hit == 'true'
+      run: npm run build
+      env:
+        CI: true
+
+    - name: Copy project to dist
+      run: rsync -a ./ dist/
+
+    - name: Remove distignore files
+      run: |
+        cd dist
+        grep -vE '^\s*#|^\s*$' ../.distignore | xargs rm -rf
+
+    - name: Run plugin check
+      uses: wordpress/plugin-check-action@v1
+      with:
+        build-dir: dist
