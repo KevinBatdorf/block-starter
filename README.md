@@ -10,8 +10,8 @@ An opinionated starter template for crafting WordPress block plugins.
 ### Usage
 
 - Click "Use this template" at the top+right of the repo
-- Search replace `kevinbatdorf` with your namespace/username
-- Search replace `block-starter` with your plugin slug
+- Search/replace `kevinbatdorf` with your namespace/username
+- Search/replace `block-starter` with your plugin slug (and update maine file too)
 - Run `composer install` to install PHP dev dependencies (sometimes needed for autocomplete in IDEs)
 - Run `npm install` to install dependencies
 - Run `npm run start` to start the dev server
