@@ -4,7 +4,7 @@ on:
     types: published
 jobs:
     plugin-check:
-      uses: ./.github/workflows/reusable/plugin-check.yml
+      uses: ./.github/reusable/plugin-check.yml
     tag:
       name: Make release
       runs-on: ubuntu-latest

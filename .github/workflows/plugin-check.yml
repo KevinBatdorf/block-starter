@@ -6,4 +6,4 @@ on:
 
 jobs:
   plugin-check:
-    uses: ./.github/workflows/reusable/plugin-check.yml
+    uses: ./.github/reusable/plugin-check.yml
