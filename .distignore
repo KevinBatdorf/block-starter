@@ -19,3 +19,4 @@
 /.gitignore
 /playwright.config.ts
 /.distignore
+/src
