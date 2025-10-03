@@ -1,4 +1,6 @@
-name: Playwright
+name: Playwright Tests
+permissions:
+  contents: write
 on:
   pull_request:
   push:
