@@ -12,8 +12,8 @@
 		"lint:fix": "biome check --write",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"test:e2e": "npx playwright test",
-		"test:e2e:ui": "npx playwright test --ui",
+		"test:e2e": "playwright test",
+		"test:e2e:ui": "playwright test --ui",
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
