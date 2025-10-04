@@ -57,7 +57,7 @@ jobs:
 
     - name: Install Playwright Browsers
       if: steps.cache-browsers.outputs.cache-hit != 'true'
-      run: npm run playwright:install
+      run: npx playwright install --with-deps
 
     - name: Build project
       run: npm run build
@@ -65,7 +65,7 @@ jobs:
         CI: true
 
     - name: Run Playwright tests
-      run: npm run test:e2e
+      run: npx playwright test
 
     - name: Update README last passed
       if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'schedule' && success() }}
