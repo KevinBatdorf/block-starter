@@ -57,7 +57,7 @@ jobs:
 
     - name: Install Playwright Browsers
       if: steps.cache-browsers.outputs.cache-hit != 'true'
-      run: playwright install --with-deps
+      run: npm run playwright:install
 
     - name: Build project
       run: npm run build

@@ -12,6 +12,7 @@
 		"lint:fix": "biome check --write",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
+		"playwright:install": "playwright install --with-deps",
 		"test:e2e": "playwright test",
 		"test:e2e:ui": "playwright test --ui",
 		"start": "wp-scripts start"
