@@ -8,7 +8,7 @@
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php require '/wordpress/wp-load.php'; require '/wordpress/wp-content/plugins/block-starter/tests/setup.php'; ?>"
+			"code": "<?php require '/wordpress/wp-content/plugins/simple-whiteboard/tests/setup.php'; ?>"
 		}
 	]
 }

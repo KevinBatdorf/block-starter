@@ -1,4 +1,5 @@
 <?php
+require '/wordpress/wp-load.php';
 
 $userId = 1;
 
