@@ -17,7 +17,7 @@ jobs:
           run: npm ci
           env:
             CI: true
-        
+
         - name: Install Playwright Browsers
           run: npx playwright install --with-deps
 

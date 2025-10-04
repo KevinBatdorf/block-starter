@@ -16,7 +16,7 @@ export default defineConfig({
 		screenshot: "only-on-failure",
 	},
 	webServer: {
-		command: `npx @wp-playground/cli@latest server --auto-mount --blueprint=tests/blueprint.json --port=${PORT} --internal-cookie-store=true --login=false`,
+		command: `wp-playground-cli server --auto-mount --blueprint=tests/blueprint.json --port=${PORT} --internal-cookie-store=true --login=false`,
 		url: BASE,
 		reuseExistingServer: false,
 	},
