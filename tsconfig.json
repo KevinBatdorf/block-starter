@@ -7,6 +7,7 @@
 		"noEmit": true,
 		"allowImportingTsExtensions": true,
 		"jsx": "react-jsx",
+		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"moduleDetection": "force",
 		"isolatedModules": true,
@@ -16,7 +17,7 @@
 		"noUncheckedIndexedAccess": true,
 		"noImplicitOverride": true,
 
-		"module": "NodeNext",
+		"module": "esnext",
 		"outDir": "dist",
 		"sourceMap": true,
 
