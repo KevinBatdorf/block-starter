@@ -22,7 +22,7 @@
 		"@types/node": "^24.6.2",
 		"@types/wordpress__block-editor": "^11.5.17",
 		"@types/wordpress__blocks": "^12.5.18",
-		"@wordpress/e2e-test-utils-playwright": "^1.32.0",
+		"@wordpress/e2e-test-utils-playwright": "^1.34.0",
 		"@wordpress/scripts": "^30.25.0",
 		"@wp-playground/cli": "^3.0.8",
 		"typescript": "^5.9.3"
