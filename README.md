@@ -87,4 +87,5 @@ An opinionated starter template for crafting WordPress block plugins.
 
 
 
-<!-- Playwright last run: 2025-11-21 08:12:30 UTC -->
+
+<!-- Playwright last run: 2025-11-22 08:10:47 UTC -->
