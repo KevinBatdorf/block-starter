@@ -90,4 +90,5 @@ An opinionated starter template for crafting WordPress block plugins.
 
 
 
-<!-- Playwright last run: 2025-11-24 08:12:56 UTC -->
+
+<!-- Playwright last run: 2025-11-25 08:12:56 UTC -->
