@@ -2,6 +2,6 @@
 	"name": "kevinbatdorf/block-starter-text",
 	"require": {},
 	"require-dev": {
-		"johnpbloch/wordpress-core": "*"
+		"php-stubs/wordpress-stubs": "*"
 	}
 }
