@@ -184,4 +184,5 @@ An opinionated starter template for crafting WordPress block plugins.
 
 
 
-<!-- Playwright last run: 2026-02-27 08:20:58 UTC -->
+
+<!-- Playwright last run: 2026-02-28 08:12:52 UTC -->
