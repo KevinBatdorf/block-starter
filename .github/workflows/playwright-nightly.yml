@@ -1,10 +1,11 @@
-name: Playwright Tests
+name: Playwright Tests (WP Nightly)
 permissions:
   contents: write
 on:
-  pull_request:
   push:
     branches: main
+  schedule:
+    - cron: '0 8 * * *'
 
 jobs:
   discover:
@@ -28,7 +29,7 @@ jobs:
     name: ${{ matrix.suite }}
     needs: discover
     concurrency:
-      group: ${{ github.workflow }} - ${{ matrix.suite }} - ${{ github.event.pull_request.number || github.ref }}
+      group: ${{ github.workflow }} - ${{ matrix.suite }} - ${{ github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
     strategy:
@@ -56,11 +57,13 @@ jobs:
 
     - name: Run Playwright tests
       run: RUN_PROJECT="${{ matrix.suite }}" npx playwright test --project="${{ matrix.suite }}"
+      env:
+        WP_VERSION: nightly
 
     - name: Set artifact name
       if: ${{ !cancelled() }}
       id: artifact
-      run: echo "name=pw-${{ matrix.suite }}" >> "$GITHUB_OUTPUT"
+      run: echo "name=pw-nightly-${{ matrix.suite }}" >> "$GITHUB_OUTPUT"
 
     - uses: actions/upload-artifact@v6
       if: ${{ !cancelled() }}
