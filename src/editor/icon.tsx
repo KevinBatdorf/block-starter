@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
 
 export const icon = (
 	<svg
@@ -9,7 +9,7 @@ export const icon = (
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
 	>
-		<title>{__('Plugin Icon', 'block-starter')}</title>
+		<title>{__("Plugin Icon", "block-starter")}</title>
 		<path
 			d="M3 21L13 11M18 6L15.5 8.5"
 			stroke="#000000"
