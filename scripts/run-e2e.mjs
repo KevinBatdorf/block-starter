@@ -17,16 +17,17 @@ console.log(
 
 let failed = false;
 for (const project of projects) {
-	let passed = false;
 	for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-		if (attempt > 1) console.log(`\n↻ Retrying: ${project} (attempt ${attempt}/${MAX_ATTEMPTS})`);
+		if (attempt > 1)
+			console.log(
+				`\n↻ Retrying: ${project} (attempt ${attempt}/${MAX_ATTEMPTS})`,
+			);
 		else console.log(`\n▶ Running: ${project}`);
 		try {
 			execSync(
 				`RUN_PROJECT="${project}" npx playwright test --project="${project}" ${args}`,
 				{ stdio: "inherit" },
 			);
-			passed = true;
 			break;
 		} catch {
 			if (attempt === MAX_ATTEMPTS) failed = true;
