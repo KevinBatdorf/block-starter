@@ -32,7 +32,7 @@
 		"@wordpress/block-editor": "^15.5.0",
 		"@wordpress/blocks": "^15.5.0",
 		"@wordpress/components": "^30.5.0",
-		"@wordpress/data": "^10.32.0",
+		"@wordpress/data": "^10.34.0",
 		"@wordpress/element": "^6.32.0",
 		"@wordpress/i18n": "^6.5.0",
 		"postcss": "^8.5.6",
