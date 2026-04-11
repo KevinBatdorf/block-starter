@@ -1,8 +1,9 @@
 # TODO: rewrite this to run with wp-playground
 name: 'Plugin Check'
 on:
+  pull_request:
   push:
-    branches: main # Too slow to run on every PR
+    branches: main
   workflow_dispatch:
   workflow_call: # Triggered by other workflows
   schedule:
