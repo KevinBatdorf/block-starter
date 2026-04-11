@@ -13,12 +13,12 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         id: setup-node
         with:
-          node-version: lts/*
+          node-version: 22
           cache: 'npm'
           cache-dependency-path: |
             package-lock.json
@@ -53,7 +53,7 @@ jobs:
         run: rsync -a --delete --exclude-from='.distignore' ./ block-starter/
 
       - name: Package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: block-starter
           retention-days: 5

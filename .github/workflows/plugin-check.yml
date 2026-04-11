@@ -5,6 +5,8 @@ on:
     branches: main # Too slow to run on every PR
   workflow_dispatch:
   workflow_call: # Triggered by other workflows
+  schedule:
+    - cron: '0 8 * * *'
 jobs:
   test:
     name: Run plugin check
@@ -14,12 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
 
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       id: setup-node
       with:
-        node-version: lts/*
+        node-version: 22
         cache: 'npm'
         cache-dependency-path: |
           package-lock.json

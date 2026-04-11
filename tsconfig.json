@@ -7,7 +7,7 @@
 		"noEmit": true,
 		"allowImportingTsExtensions": true,
 		"jsx": "react-jsx",
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
 		"moduleDetection": "force",
 		"isolatedModules": true,
