@@ -1,0 +1,53 @@
+---
+path: tests/**
+---
+
+# Playwright + WP Playground Testing Guidelines
+
+## How It Works
+
+- Each `*.spec.ts` file is its own Playwright project, CI matrix job, and WP Playground instance.
+- The `playwright.config.ts` auto-discovers specs by finding `*.spec.ts` files and looking for the closest `blueprint.json` in the same directory or one level up.
+- Multiple specs can share a `blueprint.json` — they'll share a Playground instance. To isolate a test, give it its own directory with its own `blueprint.json`.
+- Each `blueprint.json` activates the plugin, defines `WP_DEBUG`, and runs `setup.php` to dismiss welcome guides.
+
+## Editor Canvas vs Page
+
+WordPress renders the block editor inside an iframe.
+
+- `editor.canvas` — use for anything inside the editor: blocks, text content, inline styles.
+- `page` — use for sidebar panels, toolbar buttons, settings controls.
+
+Example:
+```typescript
+// Block content (inside iframe)
+const block = editor.canvas.locator('[data-type="my/block"]');
+
+// Sidebar control (outside iframe)
+await page.getByRole('button', { name: 'Settings' }).click();
+```
+
+## Common Pitfalls
+
+- **Never use `page.goBack()`.** WP Playground crashes. Split into separate tests instead.
+- **No retries.** `retries: 0` in config. Retries mask real failures.
+- **State leaks between tests.** Tests in the same spec share a Playground instance. Theme, settings, and block defaults persist. Explicitly reset anything a previous test might have changed.
+- **Duplicate IDs.** Some WP components render both a visible element and a loading placeholder with the same ID. Use `button#my-id` instead of `#my-id` to avoid strict mode violations.
+- **Hidden elements.** Some blocks have hidden elements (e.g., copy-button textarea) that match generic selectors like `pre` or `getByText`. Use specific selectors to exclude them.
+
+## Assertions
+
+- Use `toBeInViewport()` not `toBeVisible()` for content hidden by `max-height` / `overflow: hidden`. Playwright considers overflow-hidden elements as "visible."
+- Use `expect.poll()` or `expect(...).toPass({ timeout })` for async operations (WASM compilation, REST API saves, React re-renders) instead of `waitForTimeout`.
+- Use `{ timeout: 10000 }` on `toHaveCSS` when checking dynamically applied styles.
+
+## Preview / Front-End Testing
+
+- `admin.createNewPost()` creates a post, not a page. Preview URL: `/?p=${postId}&preview=true`.
+- Save the draft and wait for the saved state before navigating to preview.
+- On the front end, use `page.locator('.wp-block-...')` — no `editor.canvas` needed.
+
+## Config
+
+- Use `fast-glob` not `node:fs` `globSync` — `@types/node` is pinned to v20 by `@wordpress/e2e-test-utils-playwright`.
+- Use `.filter((s): s is { ... } => s !== null)` instead of `.filter(Boolean)` for type narrowing.
