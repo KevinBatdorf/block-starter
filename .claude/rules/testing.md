@@ -7,8 +7,9 @@ path: tests/**
 ## How It Works
 
 - Each `*.spec.ts` file is its own Playwright project, CI matrix job, and WP Playground instance.
-- The `playwright.config.ts` auto-discovers specs by finding `*.spec.ts` files and looking for the closest `blueprint.json` in the same directory or one level up.
-- Multiple specs can share a `blueprint.json` — they'll share a Playground instance. To isolate a test, give it its own directory with its own `blueprint.json`.
+- The `playwright.config.ts` auto-discovers specs by finding `*.spec.ts` files and walking up from the spec's directory to find the closest `blueprint.json`. A shared blueprint in `tests/` serves all specs unless a subdirectory provides its own override.
+- Multiple specs sharing the same `blueprint.json` share a Playground instance. To isolate a test, give it its own directory with its own `blueprint.json`.
+- Each spec = one separate GitHub Actions runner = one fresh WP Playground instance. They do NOT share state across specs. Tests within the same spec DO share state.
 - Each `blueprint.json` activates the plugin, defines `WP_DEBUG`, and runs `setup.php` to dismiss welcome guides.
 
 ## Editor Canvas vs Page
