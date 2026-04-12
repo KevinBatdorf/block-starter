@@ -40,7 +40,8 @@ build
 /playwright/.cache/
 /playwright/.auth/
 /artifacts/
-# Claude Code — commit rules and settings, ignore user-specific files
+# Claude Code — commit rules, skills, and settings, ignore user-specific files
 .claude/*
 !.claude/rules/
+!.claude/skills/
 !.claude/settings.json
