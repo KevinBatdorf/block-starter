@@ -66,14 +66,14 @@ jobs:
           "steps": [
             {
               "step": "installPlugin",
-              "pluginZipFile": {
+              "pluginData": {
                 "resource": "wordpress.org/plugins",
                 "slug": "plugin-check"
               }
             },
             {
               "step": "activatePlugin",
-              "pluginPath": "plugin-check/plugin-check.php"
+              "pluginPath": "plugin-check/plugin.php"
             },
             {
               "step": "activatePlugin",
