@@ -1,4 +1,3 @@
-# TODO: rewrite this to run with wp-playground
 name: 'Plugin Check'
 on:
   pull_request:
@@ -53,10 +52,41 @@ jobs:
       env:
         CI: true
 
-    - name: copy files except those in .distignore
+    - name: Copy plugin files
       run: rsync -a --delete --exclude-from='.distignore' ./ block-starter/
 
+    - name: Download wp-cli
+      run: curl -sL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o wp-cli.phar
+
+    - name: Create plugin-check blueprint
+      run: |
+        cat > plugin-check-blueprint.json <<'EOF'
+        {
+          "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+          "steps": [
+            {
+              "step": "installPlugin",
+              "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "plugin-check"
+              }
+            },
+            {
+              "step": "activatePlugin",
+              "pluginPath": "plugin-check/plugin-check.php"
+            },
+            {
+              "step": "activatePlugin",
+              "pluginPath": "block-starter/block-starter.php"
+            }
+          ]
+        }
+        EOF
+
     - name: Run plugin check
-      uses: wordpress/plugin-check-action@v1
-      with:
-        build-dir: block-starter
+      run: |
+        npx wp-playground-cli php \
+          --blueprint=plugin-check-blueprint.json \
+          --mount="$(pwd)/block-starter:/wordpress/wp-content/plugins/block-starter" \
+          --wp=latest \
+          -- "$(pwd)/wp-cli.phar" plugin check block-starter
