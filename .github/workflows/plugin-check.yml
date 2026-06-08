@@ -29,7 +29,7 @@ jobs:
 
     - name: Cache node_modules and npm cache
       id: cache-node-modules
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: |
           node_modules
@@ -56,7 +56,9 @@ jobs:
       run: rsync -a --delete --exclude-from='.distignore' ./ block-starter/
 
     - name: Download wp-cli
-      run: curl -sL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o wp-cli.phar
+      run: |
+        mkdir -p wp-cli-tools
+        curl -sL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o wp-cli-tools/wp-cli.phar
 
     - name: Create plugin-check blueprint
       run: |
@@ -88,5 +90,6 @@ jobs:
         npx wp-playground-cli php \
           --blueprint=plugin-check-blueprint.json \
           --mount="$(pwd)/block-starter:/wordpress/wp-content/plugins/block-starter" \
+          --mount="$(pwd)/wp-cli-tools:/tools" \
           --wp=latest \
-          -- "$(pwd)/wp-cli.phar" plugin check block-starter
+          -- /tools/wp-cli.phar plugin check block-starter
