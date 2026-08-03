@@ -7,8 +7,7 @@ test.beforeEach(async ({ requestUtils }) => {
 
 test("Block is added", async ({ admin, page, editor }) => {
 	await admin.createNewPost({ title: "My first post" });
-	// Just a dummy test to verify things are working
 	await editor.insertBlock({ name: "kevinbatdorf/block-starter" });
-	// This text would be in the sidebar
-	expect(page.getByTestId("coming-soon")).toContainText("Coming soon");
+	// Sidebar renders outside the canvas iframe, so page — not editor.canvas
+	await expect(page.getByTestId("coming-soon")).toContainText("Coming soon");
 });

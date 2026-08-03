@@ -31,7 +31,8 @@ await page.getByRole('button', { name: 'Settings' }).click();
 ## Common Pitfalls
 
 - **Never use `page.goBack()`.** WP Playground crashes. Split into separate tests instead.
-- **No retries.** `retries: 0` in config. Retries mask real failures.
+- **Retries are CI-only.** `retries: process.env.CI ? 1 : 0` in config. One CI retry absorbs WP Playground flakes (random 500s); local runs stay at 0 so real failures surface.
+- **Always `await` expect assertions.** A floating `expect(...).toContainText(...)` races test teardown — it passes while renders are fast and fails when they slow down.
 - **State leaks between tests.** Tests in the same spec share a Playground instance. Theme, settings, and block defaults persist. Explicitly reset anything a previous test might have changed.
 - **Duplicate IDs.** Some WP components render both a visible element and a loading placeholder with the same ID. Use `button#my-id` instead of `#my-id` to avoid strict mode violations.
 - **Hidden elements.** Some blocks have hidden elements (e.g., copy-button textarea) that match generic selectors like `pre` or `getByText`. Use specific selectors to exclude them.
