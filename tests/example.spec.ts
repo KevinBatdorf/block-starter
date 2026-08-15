@@ -9,6 +9,7 @@ test("Block is added", async ({ admin, page, editor }) => {
 	await admin.createNewPost({ title: "My first post" });
 	// Just a dummy test to verify things are working
 	await editor.insertBlock({ name: "kevinbatdorf/block-starter" });
-	// This text would be in the sidebar
-	expect(page.getByTestId("coming-soon")).toContainText("Coming soon");
+	// InspectorControls only render once the settings sidebar is open
+	await editor.openDocumentSettingsSidebar();
+	await expect(page.getByTestId("coming-soon")).toContainText("Coming soon");
 });
