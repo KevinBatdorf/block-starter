@@ -83,5 +83,5 @@ export async function newPost(admin: Admin, title: string) {
 
 ## Config
 
-- Use `fast-glob` not `node:fs` `globSync` — `@types/node` is pinned to v20 by `@wordpress/e2e-test-utils-playwright`.
+- `playwright.config.ts` and `scripts/run-e2e.mjs` use `node:fs` `globSync`, which needs Node 22+ at runtime. `@types/node` is pinned to v20 by `@wordpress/e2e-test-utils-playwright` and predates it, but `tsconfig.json` only includes `src`, so neither file is type-checked. Adding either to `tsconfig` means bumping those types or switching to `fast-glob` first.
 - Use `.filter((s): s is { ... } => s !== null)` instead of `.filter(Boolean)` for type narrowing.
